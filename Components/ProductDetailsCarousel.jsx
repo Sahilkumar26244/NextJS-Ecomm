@@ -12,13 +12,10 @@ const ProductDetailsCarousel = ({ images }) => {
                 thumbWidth={60}
                 className="productCarousel"
             >
-                
-                 <img src="/p2.webp" />
-                <img src="/p3.webp" />
-                <img src="/p4.webp" />
-                <img src="/p5.webp" />
-                <img src="/p6.webp" />
-                <img src="/p7.webp" /> 
+                {images.map((img) => (
+                    <img src={img.attributes.url} alt={img.attributes.name} />
+                ))}
+                 
             </Carousel>
         </div>
     );

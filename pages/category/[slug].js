@@ -2,19 +2,24 @@ import ProductCard from "@/Components/ProductCard";
 import Wrapper from "@/Components/Wrapper";
 import { fetchDataFromApi } from "@/utils/api";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 
 const maxResult = 3;
 
 function Category({ category, products, slug }) {
   const [pageIndex, setPageIndex] = useState(1);
+  const {query} = useRouter()
+
+  useEffect(() => {
+    setPageIndex(1)
+  },[query])
 
   const { data, error, isLoading } = useSWR(
     `/api/products?populate=*&[filters][categories][slug][$eq]=${slug}&pagination[page]=${pageIndex}&pagination[pageSize]=${maxResult}`,
     fetchDataFromApi,
     {
-      fallback: products,
+      fallbackData: products,
     }
   );
 
