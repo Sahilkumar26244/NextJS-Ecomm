@@ -6,6 +6,11 @@ import React, { useState } from "react";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { getDiscountPricePercentage } from "@/utils/helper";
 import ReactMarkdown from "react-markdown";
+import {useSelector,useDispatch} from 'react-redux'
+import { addToCart } from "@/store/cartSlice";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ProductDetails({ product, products }) {
   const p = product?.data?.[0]?.attributes;
@@ -13,8 +18,24 @@ function ProductDetails({ product, products }) {
   const [selectedSize, setSelectedSize] = useState();
   const [showError, setShowError] = useState(false);
 
+  const dispatch = useDispatch()
+
+  const notify = () => {
+    toast.success("Success. Check your cart!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+    });
+};
+
   return (
     <div className="w-full md:py-20">
+    <ToastContainer />
       <Wrapper>
         <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
           <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
