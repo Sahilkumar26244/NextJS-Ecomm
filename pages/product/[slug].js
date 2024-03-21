@@ -135,7 +135,7 @@ function ProductDetails({ product, products }) {
               <div className="text-lg font-bold mb-5">Product Details</div>
               <div className="markdown text-md-5">
                 <ReactMarkdown>
-                {p.description}
+                Description
                 </ReactMarkdown>
               </div>
             </div>
